@@ -1,0 +1,6 @@
+Sort_Energy_CellPara.sh is a Shell and Python script.
+It allows to extract and plot cell parameters (a, b , c and volume) as a function of energy.
+
+For Demo open Demo.gif
+
+python packages need: pylab & scipy
