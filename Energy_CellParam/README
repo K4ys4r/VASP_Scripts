@@ -1,5 +1,5 @@
 Sort_Energy_CellPara.sh is a Shell and Python script.
-It allows to extract and plot cell parameters (a, b , c and volume) as a function of energy.
+It allows to extract and plot cell parameters (a, b , c and volume) as a function of energy from VASP OUTCAR.
 
 For Demo open Demo.gif
 
