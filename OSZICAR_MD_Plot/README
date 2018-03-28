@@ -1,0 +1,11 @@
+Plot_OSZICAR_MD.py is a Python script which allows to plot all OSZICAR quantities for a molecular dynamic calculation.
+All quantities are :
+    T  : is the current temperature.
+    E  : is the total free energy (including the kinetic energy of the ions and the energy of the Nosé thermostat).
+    F  : is the total free energy  (at this point the energy of the reference atom has been subtracted).
+    E0 : is the energy for sigma-> 0 .
+    EK : is the kinetic energy.
+    SP : is the potential energy of the Nosé thermostat.
+    SK : is the corresponding kinetic energy.
+  
+         More infos : https://cms.mpi.univie.ac.at/vasp/vasp/stdout_OSZICAR_file.html
