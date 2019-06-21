@@ -3,16 +3,21 @@
 
 import pylab as p
 
-info="\033[90m\n\
-T  : is the current temperature.\n\
+
+try:
+  input = raw_input
+except NameError:
+  pass
+
+info="T  : is the current temperature.\n\
 E  : is the total free energy (including the kinetic energy of the ions and the energy of the Nosé thermostat).\n\
 F  : is the total free energy  (at this point the energy of the reference atom has been subtracted).\n\
 E0 : is the energy for sigma-> 0 .\n\
 EK : is the kinetic energy.\n\
 SP : is the potential energy of the Nosé thermostat.\n\
 SK : is the corresponding kinetic energy.\n\n\
-   more infos : https://cms.mpi.univie.ac.at/vasp/vasp/stdout_OSZICAR_file.html\n\
-\033[0;1m"
+   more infos : https://cms.mpi.univie.ac.at/vasp/vasp/stdout_OSZICAR_file.html\n"
+
 ff=" as a function of MD Steps"
 OSZ_Labels={ "Steps"           : [0," Molecular Dynamic Steps "," (time) "],
              "T"               : [1," Temperature "," (K) ","Temperature"+ff],
@@ -26,7 +31,7 @@ OSZ_Labels={ "Steps"           : [0," Molecular Dynamic Steps "," (time) "],
 
 # Molecular Dynamic OSZICAR Reading
 def OSZICAR_READ():      
-    f=raw_input("          OSZICAR File Name ? > ")
+    f=input("          OSZICAR File Name ? > ")
     inp=open(f,"r")
     f=inp.readlines();inp.close()
     DATA=p.array([])
@@ -45,7 +50,7 @@ def PLOT_DATA(arr,Xplot,Yplot):
     x=arr[:,OSZ_Labels[Xplot][0]]
     y=arr[:,OSZ_Labels[Yplot][0]]
     lb=OSZ_Labels[Yplot][1] 
-    print "\n    Mean"+OSZ_Labels[Yplot][1]+": ",p.mean(y),OSZ_Labels[Yplot][2],"\n" 
+    print("\n\tMean {} = {} {}\n".format(OSZ_Labels[Yplot][1],p.mean(y),OSZ_Labels[Yplot][2]))
     p.rcParams["font.family"] = "serif"
     p.figure(figsize=(10,6))
     p.rcParams.update({"font.size": 14})
@@ -58,24 +63,22 @@ def PLOT_DATA(arr,Xplot,Yplot):
 
 
 OSZ=OSZICAR_READ()
-print info
+print(info)
 PLOT=True
-print "="*50
 while PLOT:
-      #Xplot=raw_input("Xplot (Steps, T, E, F, E0, EK, SP or SK ) > ")
+      #Xplot=input("Xplot (Steps, T, E, F, E0, EK, SP or SK ) > ")
       Xplot="Steps"
-      Yplot=raw_input("Yplot (T, E, F, E0, EK, SP or SK ) > ")
+      Yplot=input("Yplot (T, E, F, E0, EK, SP or SK ) > ")
       if (Xplot in OSZ_Labels) and (Yplot in OSZ_Labels):
          PLOT_DATA(OSZ,Xplot,Yplot)
       else:
-         print "\n    Error in Xplot or Yplot Label!!..\n"
+         print("\n    Error in Xplot or Yplot Label!!..\n")
          PLOT=False
-      Todo=raw_input("Plot Other Quantities (yes/no)? > ")
+      Todo=input("Plot Other Quantities (yes/no)? > ")
       if Todo=="yes":
          PLOT=True
          continue
       else:
          PLOT=False
-         print "\n    Exit!..\n"
-print "="*50,"\033[0m"
+         print("\n    Exit!..\n")
 
